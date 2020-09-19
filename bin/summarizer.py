@@ -15,7 +15,7 @@ class SummarizeDoc:
             self.config = yaml.load(fl)
         
     def loadDocs(self,filePath):
-        with open(filePath,'r',encoding='utf-8') as fl:
+        with open(filePath,'r') as fl:
             text = fl.read()
         return text
     
@@ -67,3 +67,4 @@ class SummarizeDoc:
         
 summarizeObj = SummarizeDoc()
 summary = summarizeObj.findSummary()
+print(summary)
