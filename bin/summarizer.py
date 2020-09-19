@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sat Sep 19 13:13:22 2020
+Created on Sat Sep 19 15:53:02 2020
 
-@author: saz2n
+@author: Anaji
 """
 import yaml
+import numpy as np
 
 class SummarizeDoc:
     
@@ -33,8 +34,28 @@ class SummarizeDoc:
         firstSent, restOfSent = sentences[0], sentences[1:]
         return firstSent, restOfSent
     
+    def findSentLength(self,text):
+        return text.split()
     
-
-
+    def findSentLenghtArray(self,sentences):
+        return [self.findSentLength(sent) for sent in sentences]
+    
+    def findTopSentences(self,sentLengths,sentences,n):
+        sortedIdx = np.argsort(sentLengths)
+        topnIdx = sortedIdx[-n:]
+        topnSentences = [sentences[i] for i in topnIdx]
+        return topnSentences
+    
+    def findSummary(self):
+        filePath = self.config['data_path']['train_data']
+        text = self.loadDocs(filePath)
+        sentences = self.splitSentences(text)
+        firstSent,restOfSent = self.groupSentences(sentences)
+        sentLengths = self.findSentLenghtArray(restOfSent)
+        topnSentences = self.findTopSentences(sentLengths,restOfSent,self.config['sent_num'])
+        allSentences = [firstSent] + topnSentences
+        summary = ' '.join(allSentences)
+        return summary
+        
 summarizeObj = SummarizeDoc()
 summarizeObj.loadConfig()
