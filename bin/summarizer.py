@@ -12,7 +12,7 @@ class SummarizeDoc:
     
     def __init__(self):
         with open('../config/config.yml','r') as fl:
-            self.config = yaml.load(fl)
+            self.config = yaml.load(fl, Loader=yaml.FullLoader)
         
     def loadDocs(self,filePath):
         with open(filePath,'r') as fl:
