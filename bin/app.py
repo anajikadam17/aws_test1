@@ -4,22 +4,17 @@ Created on Sat Sep 19 16:52:13 2020
 
 @author: Anaji
 """
-
 import flask
 from flask import Flask, request
+from summarizer import SummarizeDoc
 
 app = Flask(__name__)
 
-@app.route('/home',methods=['GET'])
-def checkStatus():
-    return "YAY!!! its working"
+@app.route('/',methods=['GET'])
+def home():
+    summarizeObj = SummarizeDoc()
+    summary = summarizeObj.findSummary()
+    return summary
 
-
-@app.route('/add',methods=['GET'])
-def addNum():
-    a = 2
-    b = 3
-    return "The sm of {} and {} is {}".format(a,b,a+b)
-
-
-app.run(host='localhost',port=8023)
+if __name__ == "__main__":
+    app.run(host = 'localhost', port = 8080)
