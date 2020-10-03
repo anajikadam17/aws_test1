@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+      # -*- coding: utf-8 -*-
 """
 Created on Sat Sep 19 16:52:13 2020
 
@@ -17,4 +17,4 @@ def home():
     return summary
 
 if __name__ == "__main__":
-    app.run(host = 'localhost', port = 5000)
+    app.run(host = '0.0.0.0', port = 5000)
